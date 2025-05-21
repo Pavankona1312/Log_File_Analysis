@@ -1,0 +1,86 @@
+
+body {
+    font-family: system-ui, sans-serif;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+    margin: 0;
+    padding: 2em;
+    color: #333;
+  }
+.navbar {
+    background-color: #fff;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+    padding: 1em;
+    width: 97%;
+    margin-bottom: 2rem;
+  }
+.navbar a {
+    margin-left: 1em;
+    text-decoration: none;
+    color: #5b5b5b;
+  }
+
+.navbar a:hover {
+    color: #000;
+    text-decoration: none;
+  }
+
+label {
+    font-weight: 500;
+  }
+  
+  #form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    font-size: 1em;
+    background-color: #fff;
+    padding: 50px;
+    border-radius: 8px;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+    width: 35%; 
+    margin: auto;
+  }
+
+input[type="datetime-local"],select,input[type="text"],input[type="number"] {
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+input[type="submit"] {
+    background-color: #000;
+    color: #fff;
+    padding: 0.5em;
+    border-radius: 4px;
+    font-size: 1em;
+    border: none;
+    width: 100%;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+  }
+
+input[type="submit"]:hover {
+    background-color: #333;
+  }
+
+img{
+    margin-top: 2rem;
+    width: 80%;
+}
+
+#down {
+    margin-top: 1rem;
+    text-decoration: none;
+    background-color: #000;
+    border: 2px solid #000;
+    color: #fff;
+    border-radius: 4px;
+    padding: 0.5em;
+}
+
+#down:hover {
+    background-color: #333;
+}

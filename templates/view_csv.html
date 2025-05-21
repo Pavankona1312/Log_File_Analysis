@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Logs</title>
+    <link rel="stylesheet" href="./static/view_csv.css">
+</head>
+<body>
+  <nav class="navbar">
+      <a href="/">Home</a>
+      <a href="/view">View Logs</a>
+      <a href="/plot">Plots</a>
+</nav>
+    <button onclick="Appear()" id="appear">Click to Customize</button>
+    <form method="post" id="form" style="display: none;">
+      <label for="from-time">From:</label>
+      <input type="datetime-local" name="from-time" id="from-time" value="{{ min_date }}" min="{{ min_date }}" max="{{ max_date }}" step="1">
+  
+      <label for="to-time">To:</label>
+      <input type="datetime-local" name="to-time" id="to-time" value="{{ max_date }}" min="{{ min_date }}" max="{{ max_date }}" step="1">
+  
+      <label for="level">Log Level:</label>
+      <select name="level" id="level" required>
+          <option value="All">All</option>
+          <option value="notice">Notice</option>
+          <option value="error">Error</option>
+      </select>
+      <p>Select Event Customization:</p>
+      <label><input type="radio" name="custom" value="All" checked> All</label>
+      <label><input type="radio" name="custom" value="Cus"> Custom</label>
+  
+      <div id="event-options" style="display: none; margin-top: 10px;">
+          <p>Select Events:</p>
+          <label><input type="checkbox" name="event" value="E1"> E1</label>
+          <label><input type="checkbox" name="event" value="E2"> E2</label>
+          <label><input type="checkbox" name="event" value="E3"> E3</label>
+          <label><input type="checkbox" name="event" value="E4"> E4</label>
+          <label><input type="checkbox" name="event" value="E5"> E5</label>
+          <label><input type="checkbox" name="event" value="E6"> E6</label>
+      </div>
+      <br>
+      <input type="submit" value="Generate Custom Table" id="sub">
+    </form>
+    <a href="{{ url_for('download_file', filename=down + '.csv') }}" id="down">Click to download {{ down }} CSV</a>
+    </div>
+    <table id="table">
+      <tr>
+        <th>S.No</th>
+        <th>Time Stamp</th>
+        <th>Log Level</th>
+        <th>Message</th>
+        <th>Event ID</th>
+        <th>Template</th>
+      </tr>
+    {% for line in csv %}
+      <tr>
+        <td>{{ loop.index }}.</td>
+        {% for value in line %}
+          <td>{{ value }}</td>
+        {% endfor %}
+      </tr>
+    {% endfor %}
+    </table>
+    <script>
+      const form = document.getElementById("form");
+      const customRadios = document.getElementsByName('custom');  // returns NodeList
+      const eventOptions = document.getElementById('event-options');  // select by ID
+  
+      for (let i = 0; i < customRadios.length; i++) {
+          customRadios[i].addEventListener('change', function () {
+              if (this.value === 'Cus') {
+                  eventOptions.style.display = 'block';
+              } else {
+                  eventOptions.style.display = 'none';
+              }
+          });
+      }
+      document.getElementById('sub').addEventListener('click',function(){
+        form.style.display="none";
+      });
+      function Appear(){
+        document.getElementById('form').style.display = "flex"
+      }
+  </script>
+</body>
+</html>

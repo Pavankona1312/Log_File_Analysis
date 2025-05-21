@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./static/android_csv.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="/">Home</a>
+    <a href="/view_android">View Logs</a>
+    <a href="/plot_android">Plots</a>
+</nav>
+    <button onclick="Appear()" id="appear">Click to Customize</button>
+    <form method="post" id="form" style="display: none;">
+      <label for="from-time">From:</label>
+      <input type="datetime-local" name="from-time" id="from-time" value="{{ min_date }}" min="{{ min_date }}" max="{{ max_date }}" step="1">
+      <input type="number" name="from-time" min="0" max="999" value="0">
+  
+      <label for="to-time">To:</label>
+      <input type="datetime-local" name="to-time" id="to-time" value="{{ max_date }}" min="{{ min_date }}" max="{{ max_date }}" step="1">
+      <input type="number" min="0" max="999" name="to-time" value="0">
+  
+      <label for="level">Enter Level:</label>
+      <input type="text" name="level" id="level" placeholder="ALL" value="ALL">
+      
+      <label for="event">Enter Event ID</label>
+      <input type="text" name="event" id="event" placeholder="ALL" value="ALL">
+
+      <input type="submit" value="Generate Custom Table" id="sub">
+    </form>
+    <a href="{{ url_for('download_file', filename=down + '.csv') }}" id="down">Click to download {{ down }} CSV</a>
+    <table id="table">
+        <tr>
+            <th>S.No</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>PID</th>
+            <th>TID</th>
+            <th>Level</th>
+            <th>Component</th>
+            <th>Message</th>
+            <th>Event ID</th>
+          </tr>
+        {% for line in csv %}
+          <tr>
+            <td>{{ loop.index }}.</td>
+            {% for value in line %}
+              <td>{{ value }}</td>
+            {% endfor %}
+          </tr>
+        {% endfor %}
+    </table>
+    <script>
+        const form = document.getElementById("form");
+ 
+        document.getElementById('sub').addEventListener('click',function(){
+          form.style.display="none";
+        });
+        function Appear(){
+          document.getElementById('form').style.display = "flex"
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./static/android_plot.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/">Home</a>
+        <a href="/view_android">View Logs</a>
+        <a href="/plot_android">Plots</a>
+  </nav>
+
+  <form method="post" id="form">
+    <label for="plot">Select the Plot type:</label>
+    <select name="plot" id="plot" required>
+        <option value="line">Line Plot</option>
+        <option value="pie">Pie Chart</option>
+        <option value="bar">Bar Graph</option>
+    </select>
+    <form method="post" id="form" style="display: none;">
+        <label for="from-time">From:</label>
+        <input type="datetime-local" name="from-time" id="from-time" value="{{ min_date }}" min="{{ min_date }}" max="{{ max_date }}" step="1">
+        <input type="number" name="from-time" min="0" max="999" value="0">
+    
+        <label for="to-time">To:</label>
+        <input type="datetime-local" name="to-time" id="to-time" value="{{ max_date }}" min="{{ min_date }}" max="{{ max_date }}" step="1">
+        <input type="number" min="0" max="999" name="to-time" value="0">
+        <label for="level">Enter Level:</label>
+        <input type="text" name="level" id="level" placeholder="ALL" value="ALL">
+        
+        <label for="event">Enter Event ID</label>
+        <input type="text" name="event" id="event" placeholder="ALL" value="ALL">
+  
+        <input type="submit" value="Generate Custom Plot" id="sub">
+      </form>
+
+      {% if insert != 'None': %}
+      <img src="/static/{{ insert }}_android.png" alt="{{ insert }} plot">
+      <a href="/static/{{insert}}_android.png" id="down"> Click here to download the figure </a>
+  {% endif %}
+    
+</body>
+</html>

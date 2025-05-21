@@ -1,0 +1,57 @@
+/* home.css */
+
+body {
+    font-family: system-ui, sans-serif;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    color: #333;
+}
+
+.form {
+    display: flex;
+    background-color: #fff;
+    padding: 2%;
+    border-radius: 5px;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+    flex-direction: column;
+    gap: 30px;
+    min-width: 200px;
+}
+
+#file {
+    border: 1px solid #ccc;
+    padding: 1em;
+    border-radius: 4px;
+}
+
+#sub {
+    background-color: #000;
+    color: #fff;
+    padding: 1em;
+    border: 0px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+#sub:hover {
+    background-color: #333;
+}
+
+.flashes {
+    list-style: none;
+    padding: 1em;
+    margin-top: 1em;
+    background-color: #f8d7da; 
+    border: 1px solid #f5c2c7; 
+    border-radius: 4px;
+}
+
+.flashes li {
+    font-size: smaller;
+    color: #842029; 
+}
+

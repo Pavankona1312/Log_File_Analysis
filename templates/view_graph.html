@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/view_graph.css">
+</head>
+<body>
+    <nav class="navbar">
+            <a href="/">Home</a>
+            <a href="/view">View Logs</a>
+            <a href="/plot">Plots</a>
+      </nav>
+      
+        <form method="post" id="form">
+            <label for="plot">Select the Plot type:</label>
+            <select name="plot" id="plot" required>
+                <option value="line">Line Plot</option>
+                <option value="pie">Pie Chart</option>
+                <option value="bar">Bar Graph</option>
+            </select>
+        
+            <label for="from-time">From:</label>
+            <input type="datetime-local" name="from-time" id="from-time" value="{{ min_date }}" min="{{ min_date }}" max="{{ max_date }}" step="1">
+        
+            <label for="to-time">To:</label>
+            <input type="datetime-local" name="to-time" id="to-time" value="{{ max_date }}" min="{{ min_date }}" max="{{ max_date }}" step="1">
+        
+            <label for="level">Log Level:</label>
+            <select name="level" id="level" required>
+                <option value="All">All</option>
+                <option value="notice">Notice</option>
+                <option value="error">Error</option>
+            </select>
+        
+            <p>Select Event Customization:</p>
+            <label><input type="radio" name="custom" value="All" checked> All</label>
+            <label><input type="radio" name="custom" value="Cus"> Custom</label>
+        
+            <div id="event-options" style="display: none; margin-top: 10px;">
+                <p>Select Events:</p>
+                <label><input type="checkbox" name="event" value="E1"> E1</label>
+                <label><input type="checkbox" name="event" value="E2"> E2</label>
+                <label><input type="checkbox" name="event" value="E3"> E3</label>
+                <label><input type="checkbox" name="event" value="E4"> E4</label>
+                <label><input type="checkbox" name="event" value="E5"> E5</label>
+                <label><input type="checkbox" name="event" value="E6"> E6</label>
+            </div>
+        
+            <br>
+            <div id="submit">
+            <input type="submit" value="Generate Plot">
+            </div>
+        </form>
+    {% if insert != 'None': %}
+        <img src="/static/{{ insert }}.png" alt="{{ insert }} plot">
+        <a href="/static/{{insert}}.png" id="down" download> Click here to download the figure
+    {% endif %}
+    <script>
+        const customRadios = document.getElementsByName('custom');  // returns NodeList
+        const eventOptions = document.getElementById('event-options');  // select by ID
+    
+        for (let i = 0; i < customRadios.length; i++) {
+            customRadios[i].addEventListener('change', function () {
+                if (this.value === 'Cus') {
+                    eventOptions.style.display = 'block';
+                } else {
+                    eventOptions.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

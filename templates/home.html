@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Home-Form</title>
+    <link rel="stylesheet" href="/static/home.css">
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data" class="form">
+      <select name="log_type">
+        <option value="android">Android Log</option>
+        <option value="apache">Apache Error Log</option>
+      </select>
+      <input type="file" id="file" name="file">
+      <input type="submit" value="Upload" id="sub">
+    </form>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class="flashes">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+  <script>
+    const flash = document.getElementsByClassName("flashes")[0];
+    document.getElementById("sub").addEventListener('click', 
+        setTimeout(function(){
+          flash.style.display = "none";
+        }, 2000));
+  </script>
+</body>
+</html>
